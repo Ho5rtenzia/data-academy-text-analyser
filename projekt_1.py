@@ -9,7 +9,7 @@ discord: energetic_avocado_65638
 import sys 
 import task_template
 
-split_ = "-" * 40
+section_splitter = "-" * 40
 
 # Registration of users
 users = {
@@ -21,26 +21,27 @@ users = {
 
 # Texts for analysis
 analysed_list = [None] + task_template.TEXTS
+available_texts = len(analysed_list) - 1
 
 # Name and password verification
 your_username = input("username: ")
 your_password = input("password: ")
 
 if your_username.lower() in users and users[your_username.lower()] == your_password:
-    print(split_)
+    print(section_splitter)
     print(f"Welcome to the app, {your_username}")
-    print("We have 3 texts to be analyzed.")
-    print(split_)
+    print(f"We have {available_texts} texts to be analyzed.")
+    print(section_splitter)
 else:
     print("Unregistered user, terminating the program..")
     sys.exit()
 
 #Selecting a text
 try:
-    number_of_text = int(input("Enter a number btw. 1 and 3 to select:  ")) 
-    print(split_)
+    number_of_text = int(input(f"Enter a number btw. 1 and {available_texts} to select: ")) 
+    print(section_splitter)
     if number_of_text not in range(1, len(analysed_list)):
-        print("Invalid number, please enter 1,2 or 3.")
+        print(f"Invalid number, please enter a number between 1 and {available_texts}")
         sys.exit()
 
     words_split = analysed_list[number_of_text].split()
@@ -89,12 +90,12 @@ try:
     print(f"The sum of all numbers {sum_number}.")
 
     # Bar chart 
-    print(split_)
+    print(section_splitter)
 
     max_stars_len = max(occur.count(lenght) for lenght in sorted_length)
 
     print(f"{'LEN':>3} | {'OCCURENCES':{max_stars_len + 2}} | NR.")
-    print(split_)
+    print(section_splitter)
     
     for one_lenght in sorted_length:
         count_occurences = occur.count(one_lenght)
